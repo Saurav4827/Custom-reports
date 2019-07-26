@@ -1,13 +1,16 @@
 package javascriptexecutor;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.testng.IReporter;
+import org.testng.IResultMap;
 import org.testng.ISuite;
 import org.testng.ISuiteResult;
 import org.testng.ITestContext;
+import org.testng.ITestNGMethod;
 import org.testng.xml.XmlSuite;
 
 public class CustomReport implements IReporter 
@@ -38,9 +41,22 @@ public class CustomReport implements IReporter
 
                        System.out.println("::End Date Time for execution->"+context.getEndDate());
 
-               }
+               
+        
+        IResultMap resultMap = context.getFailedTests();
+           Collection<ITestNGMethod> failedMethods = resultMap.getAllMethods();
+
+
+        for(ITestNGMethod iTestNGMethods : failedMethods)
+        {
+        	System.out.println("TestName"+iTestNGMethods.getMethodName());
+        	System.out.println("TestDescription"+iTestNGMethods.getDescription());
+        			System.out.println("TestDate"+iTestNGMethods.getDate());
         }
 		
+        }
+       }
 	}
 
 }
+
